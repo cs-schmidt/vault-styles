@@ -1,0 +1,109 @@
+/* Variable adjustments. */
+body {
+  --nav-item-size: 14px;
+  --code-normal: var(--text-muted);
+  /* TODO: Adjust theme for code blocks with the variables below.  */
+  /* --code-comment: var(--text-faint); */
+  /* --code-function: var(--color-yellow); */
+  /* --code-important: var(--color-orange); */
+  /* --code-keyword: var(--color-pink); */
+  /* --code-operator: var(--color-red); */
+  /* --code-property: var(--color-cyan); */
+  /* --code-punctuation: var(--text-muted); */
+  /* --code-string: var(--color-green); */
+  /* --code-tag: var(--color-red); */
+  /* --code-value: var(--color-purple); */
+}
+
+.theme-dark,
+.theme-light {
+  --color-accent: #20a39e;
+  --bold-color: #cc2936;
+  --italic-color: #a288e3;
+  --link-color: #68a357;
+  --link-unresolved-color: hsl(107 30% 30%);
+  --hover-accent: #cc2936;
+}
+
+/* Remove alternate background coloring of tree items. */
+.nav-folder:nth-child(odd) > .nav-folder-title,
+.nav-file:nth-child(odd),
+.tree-item-self.outgoing-link-item:nth-child(odd) {
+  background-color: transparent;
+}
+
+/* Prevents the block editing button in callouts from being displayed. */
+.markdown-source-view.mod-cm6 .edit-block-button {
+  display: none;
+}
+
+/* Reduce list item identation in callouts (bullets, numbered, and tasks). */
+.markdown-rendered
+  ul:not(.contains-task-list, .dataview-result-list-ul, .has-list-bullet) {
+  padding-inline-start: 0.5em;
+}
+
+.callout ol {
+  padding-inline-start: 0.5em;
+}
+
+.markdown-rendered ul.contains-task-list {
+  padding-inline-start: 0;
+}
+
+/* Fix line height in callouts. */
+.callout-content :is(p, ul, li) {
+  line-height: 1.4em;
+}
+
+/* Remove metadata add button */
+.metadata-add-button {
+  display: none;
+}
+
+/* Change inline title color */
+.inline-title {
+  color: #a288e3;
+}
+
+/* Show inline title in hover previews. */
+.hover-popover .inline-title {
+  display: block;
+}
+
+/* Style highlights as underlines. */
+.markdown-rendered mark,
+.cm-s-obsidian span.cm-highlight {
+  background-color: transparent;
+  text-decoration-line: underline;
+  text-decoration-color: #98a2d3;
+}
+
+/* Remove double underlines from links. */
+.cm-hmd-internal-link .cm-underline.cm-underline,
+.markdown-preview-view .internal-link:not(.multi-select-pill, .metadata-link-inner),
+.markdown-source-view.mod-cm6 .is-unresolved .cm-underline,
+.metadata-container .internal-link,
+.markdown-rendered .internal-link {
+  text-decoration-line: none;
+}
+
+/* Remove alternate background coloring of table rows. */
+.cm-html-embed tbody tr,
+.markdown-rendered tbody tr {
+  background-color: var(--table-row-alt-background);
+}
+
+/* Remove strikethrough on checked tasks. */
+.task-list-item.is-checked {
+  text-decoration-line: none !important;
+}
+
+/* Hide block ID except on hover or active line. */
+:not(.cm-active) > .cm-blockid {
+  opacity: 0;
+}
+
+:not(.cm-active) > .cm-blockid:hover {
+  opacity: 1;
+}
