@@ -61,8 +61,9 @@ body {
   display: none;
 }
 
-/* Change inline title color */
+/* Change inline title styles */
 .inline-title {
+  text-decoration: underline;
   color: #a288e3;
 }
 
