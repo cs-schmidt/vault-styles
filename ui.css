@@ -1,110 +1,217 @@
-/* Variable adjustments. */
+/* ========================================================================== 
+   Global
+   ========================================================================== */
+
+/* Tweak global custom properties. */
 body {
+  /* TODO: Adjust theme for code blocks with the variables below.  */
   --nav-item-size: 14px;
   --code-normal: var(--text-muted);
-  /* TODO: Adjust theme for code blocks with the variables below.  */
-  /* --code-comment: var(--text-faint); */
-  /* --code-function: var(--color-yellow); */
-  /* --code-important: var(--color-orange); */
-  /* --code-keyword: var(--color-pink); */
-  /* --code-operator: var(--color-red); */
-  /* --code-property: var(--color-cyan); */
-  /* --code-punctuation: var(--text-muted); */
-  /* --code-string: var(--color-green); */
-  /* --code-tag: var(--color-red); */
-  /* --code-value: var(--color-purple); */
+
+  /* --code-comment: var(--text-faint);
+  --code-function: var(--color-yellow);
+  --code-important: var(--color-orange);
+  --code-keyword: var(--color-pink);
+  --code-operator: var(--color-red);
+  --code-property: var(--color-cyan);
+  --code-punctuation: var(--text-muted);
+  --code-string: var(--color-green);
+  --code-tag: var(--color-red);
+  --code-value: var(--color-purple); */
 }
 
-.theme-dark,
-.theme-light {
+/* Tweak theme colors. */
+.theme-light,
+.theme-dark {
   --color-accent: #20a39e;
   --bold-color: #cc2936;
   --italic-color: #a288e3;
   --link-color: #68a357;
-  --link-unresolved-color: hsl(107 30% 30%);
+  --link-unresolved-color: hsl(107deg 30% 30%);
   --hover-accent: #cc2936;
 }
 
-/* Remove alternate background coloring of tree items. */
-.nav-folder:nth-child(odd) > .nav-folder-title,
-.nav-file:nth-child(odd),
-.tree-item-self.outgoing-link-item:nth-child(odd) {
+/* ========================================================================== 
+   Window
+   ========================================================================== */
+
+/* Navigation Menus
+   ========================================================================== */
+
+/* Remove alternate background coloring of tree items in file-explorer-like menus. */
+.workspace-leaf > .workspace-leaf-content .nav-file,
+.workspace-leaf > .workspace-leaf-content .nav-folder-title {
   background-color: transparent;
 }
 
-/* Prevents the block editing button in callouts from being displayed. */
-.markdown-source-view.mod-cm6 .edit-block-button {
-  display: none;
+/* Remove alternate background coloring of tree items in search result menus. */
+.workspace-leaf > .workspace-leaf-content .search-result-container > .tree-item-self {
+  background-color: transparent;
 }
 
-/* Reduce list item identation in callouts (bullets, numbered, and tasks). */
-.markdown-rendered
-  ul:not(.contains-task-list, .dataview-result-list-ul, .has-list-bullet) {
-  padding-inline-start: 0.5em;
+/* Remove alternate background coloring of tree items in the bookmarks menu. */
+.workspace-leaf
+  > .workspace-leaf-content[data-type='bookmarks']
+  > .view-content
+  .tree-item {
+  background-color: transparent;
 }
 
-.callout ol {
-  padding-inline-start: 0.5em;
-}
+/* ========================================================================== 
+   Markdown Pages
+   ========================================================================== */
 
-.markdown-rendered ul.contains-task-list {
-  padding-inline-start: 0;
-}
+/* Title and Frontmatter
+   ========================================================================== */
 
-/* Fix line height in callouts. */
-.callout-content :is(p, ul, li) {
-  line-height: 1.4em;
-}
-
-/* Remove metadata add button */
-.metadata-add-button {
-  display: none;
-}
-
-/* Change inline title styles */
+/* Change inline title styles across all editor modes. */
 .inline-title {
+  color: var(--bold-color);
   text-decoration: underline;
-  color: #a288e3;
 }
 
-/* Show inline title in hover previews. */
+/* Show inline titles in hover previews. */
 .hover-popover .inline-title {
   display: block;
 }
 
-/* Style highlights as underlines. */
-.markdown-rendered mark,
-.cm-s-obsidian span.cm-highlight {
-  background-color: transparent;
-  text-decoration-line: underline;
-  text-decoration-color: #98a2d3;
+/* Remove the add button from the yaml frontmatter block. */
+.metadata-add-button {
+  display: none;
 }
 
-/* Remove double underlines from links. */
-.cm-hmd-internal-link .cm-underline.cm-underline,
-.markdown-preview-view .internal-link:not(.multi-select-pill, .metadata-link-inner),
-.markdown-source-view.mod-cm6 .is-unresolved .cm-underline,
-.metadata-container .internal-link,
-.markdown-rendered .internal-link {
+/* Blocks: Callouts, Code Blocks, etc.
+   ========================================================================== */
+
+/* Remove the edit button on blocks in non-reading mode. */
+.markdown-source-view.mod-cm6 .edit-block-button {
+  display: none;
+}
+
+/* Lists: Unordered, Ordered, and Tasks
+   ========================================================================== */
+
+/* Reduce indentation within unordered lists in callouts across all editor modes. */
+.callout-content ul:not(.contains-task-list, .dataview-result-list-ul) {
+  padding-left: 1em;
+}
+
+.callout-content ul > li {
+  margin-inline-start: 0.8em;
+}
+
+/* Corrects bullet sizes on unordered lists in callouts under non-reading modes. */
+.callout-content ul .list-bullet::after {
+  width: 4px;
+  height: 4px;
+}
+
+/* Reduce indentation within ordered lists in callouts across all editor modes. */
+.callout ol {
+  padding-inline-start: 0.5em;
+}
+
+.callout-content ol > li {
+  margin-inline-start: 1.4em;
+}
+
+/* Reduce indentation within task lists in callouts. */
+.markdown-source-view .callout-content ul.contains-task-list {
+  padding-left: 0.6em;
+}
+
+.markdown-source-view .callout-content ul.contains-task-list > .task-list-item {
+  margin-inline-start: 0;
+}
+
+.markdown-source-view
+  .callout-content
+  ul.contains-task-list
+  > .task-list-item
+  .task-list-item {
+  margin-inline-start: 1.4em;
+}
+
+.markdown-source-view .callout-content ul.contains-task-list .task-list-item-checkbox {
+  margin-inline-start: 0;
+}
+
+/* Remove strikethrough from checked tasks in an unordered list. */
+.markdown-preview-view ul > li.task-list-item[data-task='x'],
+.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task='x'],
+.callout-content ul > li.task-list-item[data-task='x'] {
   text-decoration-line: none;
 }
 
+/* Correct coloring for checked tasks in ordered lists within reading mode. */
+.markdown-preview-view ol > li.task-list-item[data-task='x'],
+.callout-content ol > li.task-list-item[data-task='x'] {
+  color: var(--checklist-done-color);
+}
+
+/* Tables
+   ========================================================================== */
+
 /* Remove alternate background coloring of table rows. */
-.cm-html-embed tbody tr,
-.markdown-rendered tbody tr {
+.markdown-rendered .el-table tbody tr,
+.cm-table-widget .table-wrapper tbody tr {
   background-color: var(--table-row-alt-background);
 }
 
-/* Remove strikethrough on checked tasks. */
-.task-list-item.is-checked {
-  text-decoration-line: none !important;
+.markdown-rendered .callout-content tbody tr,
+.cm-callout .callout-content tbody tr {
+  background-color: rgb(0 0 0 / 50%);
 }
 
-/* Hide block ID except on hover or active line. */
-:not(.cm-active) > .cm-blockid {
+/* Internal Links
+   ========================================================================== */
+
+/* Remove text decoration on internal links (resolved or otherwise) in reading mode. */
+.markdown-preview-view .internal-link:not(.multi-select-pill, .metadata-link-inner),
+.markdown-rendered .internal-link.is-unresolved {
+  text-decoration: none;
+}
+
+/** 
+ * Remove text decoration on internal links (resolved or otherwise) in non-reading modes.
+ */
+.markdown-source-view.mod-cm6 .cm-underline,
+.markdown-source-view.mod-cm6 .is-unresolved .cm-underline {
+  text-decoration: none;
+}
+
+/* Block Links
+   ========================================================================== */
+
+/* Hide block IDs on lines in non-reading modes unless they're active or hovered on. */
+.cm-line:not(.cm-active) .cm-blockid {
   opacity: 0;
 }
 
-:not(.cm-active) > .cm-blockid:hover {
+.cm-line:not(.cm-active):hover .cm-blockid {
   opacity: 1;
+}
+
+/* Underlines
+   ========================================================================== */
+
+/* Convert highlights to underlines across all editor modes. */
+.markdown-rendered mark,
+.cm-s-obsidian span.cm-highlight {
+  text-decoration-line: underline;
+  background-color: transparent;
+}
+
+/* Correct highlight-type underlines with bold font. */
+.markdown-rendered strong mark,
+.cm-s-obsidian span.cm-highlight.cm-strong {
+  color: var(--bold-color);
+  text-decoration-color: var(--text-normal);
+}
+
+/* Correct highlight-type underlines styles with italic font. */
+.markdown-rendered em mark,
+.cm-s-obsidian span.cm-highlight.cm-em {
+  color: var(--italic-color);
+  text-decoration-color: var(--text-normal);
 }
